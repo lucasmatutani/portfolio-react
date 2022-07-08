@@ -9,15 +9,20 @@ const Formulario = (props) => {
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
+    const [time, setTime] = useState('')
 
     const aoSalvar = (evento) => {
         evento.preventDefault()
-        props.aoCadastrarcolaborador({
+        props.aoCadastrarColaborador({
             nome,
             cargo,
             imagem,
-            times: props.times
+            time
         })
+        setNome('')
+        setCargo('')
+        setImagem('')
+        setTime('')
     }
 
     return (
@@ -45,7 +50,13 @@ const Formulario = (props) => {
                     valor={imagem}
                     aoAlterado={valor => setImagem(valor)}
                     />
-                <ListaSuspensa item={props.times} label="Time"/>
+                <ListaSuspensa 
+                    obrigatorio={true}
+                    label="Time"
+                    itens={props.times} 
+                    valor={time}
+                    aoAlterado={valor => setTime(valor)}
+                    />
                 <Botao>
                     Criar Card
                 </Botao>
